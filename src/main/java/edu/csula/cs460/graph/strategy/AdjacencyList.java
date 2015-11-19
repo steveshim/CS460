@@ -58,6 +58,7 @@ public class AdjacencyList implements Representation {
     private boolean containNode(Node node) {
         // FIXME: maybe there is better way to check if node exists
         // to check if the node lives in any edge values
+        /**REMOVED CAUSING NULL POINTER EXCEPTION
         for (Map.Entry<Node, List<Edge>> entry : adjacencyList.entrySet()) {
             for (Edge edge: entry.getValue()) {
                 if (edge.getTo().equals(node)) {
@@ -65,7 +66,7 @@ public class AdjacencyList implements Representation {
                 }
             }
         }
-
+        **/
         // to check node exists as key
         if (adjacencyList.containsKey((node))) {
             return true;
