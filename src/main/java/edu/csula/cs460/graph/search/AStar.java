@@ -33,6 +33,8 @@ public class AStar implements SearchStrategy {
                 else if (distY > distX)
                     return -1;
                 else {
+                    if(coordinate.get(x).getY()<coordinate.get(y).getY())
+                        return -1;
                     if (coordinate.get(x).getX() >coordinate.get(y).getX() && Math.abs(coordinate.get(x).getY()-coordinate.get(y).getY()) == 1)
                         return 1;
                     else
@@ -203,7 +205,7 @@ public class AStar implements SearchStrategy {
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
-        System.out.println(result);
+
         return result;
     }
 
