@@ -26,17 +26,17 @@ public class AStar implements SearchStrategy {
 
         PriorityQueue<Node> queue = new PriorityQueue<>(1, new Comparator<Node>() {
             public int compare(Node x, Node y){
-                double distX = distances.get(x).doubleValue() + heuristic(x, dist);
-                double distY = distances.get(y).doubleValue() + heuristic(y, dist);
+                double distX = distances.get(x) + heuristic(x, dist);
+                double distY = distances.get(y) + heuristic(y, dist);
                 if (distX > distY)
                     return 1;
                 else if (distY > distX)
                     return -1;
                 else {
-                    if (coordinate.get(x).getX() > coordinate.get(y).getX())
+                    if (coordinate.get(x).getX() >coordinate.get(y).getX() && Math.abs(coordinate.get(x).getY()-coordinate.get(y).getY()) == 1)
                         return 1;
                     else
-                        return 0;
+                        return -1;
                 }
 
             }
@@ -210,9 +210,9 @@ public class AStar implements SearchStrategy {
     public double heuristic(Node current, Node end){
         IntPair curIP = coordinate.get(current);
         IntPair endIP = coordinate.get(end);
-        double doubleX = (double)(curIP.getX() - endIP.getX());
-        double doubleY = (double)(curIP.getY() - endIP.getY());
-        return (Math.abs(doubleX) + Math.abs(doubleY));
+        double doubleX = Math.pow((double)(curIP.getX() - endIP.getX()),2);
+        double doubleY = Math.pow((double)(curIP.getY() - endIP.getY()),2);
+        return Math.sqrt(doubleX + doubleY);
     }
 
 }
